@@ -1,0 +1,16 @@
+<h1>The Amazing Must-Do Application for All of Your Todo's!</h1>
+<h2>Todo List</h2>
+<div ng-repeat="toDo in toDos">
+	<span ng-click="completeToDo(toDo)">Did it?</span>
+	<span ng-hide="toDo.complete">{{toDo.message}}</span>
+	<span ng-show="toDo.complete">You completed a task! ({{toDo.message}})</span>
+</div>
+<form ng-submit="addToDo()">
+	<h3>Add a new Todo!</h3>
+	<div class="form-group">
+		<input type="text" class="form-control" ng-model="message" placeholder="Thing that needs doing"></input>
+	</div>
+	<div>
+		<button type="submit" class="btn btn-primary">Add</button>
+	</div>
+</form>
