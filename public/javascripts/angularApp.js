@@ -1,11 +1,13 @@
-var app = angular.module('myTodo', ['ui.router']);
+var app = angular.module('myTodo', ['ui.router', 'LocalStorageModule']);
 
-app.factory('toDoService', ['$http', function($http) {
-	var o = {toDos: []};
+app.factory('toDoService', ['$http', 'localStorageService', function($http, localStorageService) {
+	var o = {toDos: [], completedToDos: []};
 	
 	o.getAll = function() {
 		return $http.get('/todos').success(function(data) {
 			angular.copy(data, o.toDos);
+			var complete = localStorageService.get('completedToDos');
+			angular.copy(complete, o.completedToDos);
 		});
 	};
 
@@ -17,8 +19,29 @@ app.factory('toDoService', ['$http', function($http) {
 
 	o.delete = function(todo) {
 		$http.delete('/todos/' + todo._id).success(function(data) {
-			o.toDos.pop(todo);
+			o.getAll();
 		});
+	};
+
+	o.addCompleted = function(todo) {
+		var x = o.getCompleted();
+		x.push(todo);
+		localStorageService.set('completedToDos', x);
+		console.log(localStorageService.get('completedToDos'));
+		o.completedToDos = x;
+		console.log(o.completedToDos);
+	};
+
+	o.getCompleted = function() {
+		var complete = localStorageService.get('completedToDos');
+		var a = [];
+		if(complete === null) {
+			console.log("Entered if statement");
+			localStorageService.set('completedToDos', a);
+			return localStorageService.get('completedToDos');
+		}
+
+		return localStorageService.get('completedToDos');
 	};
 
 	return o;
@@ -32,7 +55,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 		templateUrl: 'partials/home.html',
 		controller: 'toDoController',
 		resolve: {
-			postPromise: ['toDoService', function(toDoService) {
+			todoPromise: ['toDoService', function(toDoService) {
 				return toDoService.getAll();
 			}]
 		}
@@ -43,6 +66,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 
 app.controller('toDoController', ['$scope', 'toDoService', function($scope, toDoService) {
 	$scope.toDos = toDoService.toDos;
+	$scope.completedToDos = toDoService.completedToDos;
 
 	$scope.addToDo = function() {
 		if($scope.message === '') {return;}
@@ -55,6 +79,8 @@ app.controller('toDoController', ['$scope', 'toDoService', function($scope, toDo
 	};
 
 	$scope.completeToDo = function(todo) {
+
+		toDoService.addCompleted(todo);
 		toDoService.delete(todo);
 	};
 }]);

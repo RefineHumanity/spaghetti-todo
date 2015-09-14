@@ -18,7 +18,7 @@ module.exports = function(grunt) {
 			},
 
 			views: {
-				files: ['views/*.ejs', 'views/*.html', 'public/partials/*.html'],
+				files: ['views/*.ejs', 'views/*.html', 'public/partials/*.html', 'public/stylesheets/*.css'],
 			},
 		},
 

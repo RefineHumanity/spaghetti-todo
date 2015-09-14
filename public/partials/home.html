@@ -1,16 +1,32 @@
-<h1>The Amazing Must-Do Application for All of Your Todo's!</h1>
-<h2>Todo List</h2>
-<div ng-repeat="toDo in toDos">
-	<span ng-click="completeToDo(toDo)">Did it?</span>
-	<span ng-hide="toDo.complete">{{toDo.message}}</span>
-	<span ng-show="toDo.complete">You completed a task! ({{toDo.message}})</span>
+<div class="col-md-8">
+	<div id="todoList">
+		<h1 class="text-center">Lone Ranger Todo<h1>
+		<h2 class="text-center">A Todo List for Lonesome Cowboys</h2>
+		<div id="todotable">
+			<table class="table table-hover">
+				<tr ng-repeat="toDo in toDos">
+					<td><span ng-click="completeToDo(toDo)">Did?</span></td>
+					<td>{{toDo.message}}</td>
+				</tr>
+			</table>
+		</div>
+		<form ng-submit="addToDo()">
+			<h3>Add a todo, partner!</h3>
+			<div class="form-group">
+				<input type="text" class="form-control" ng-model="message" placeholder="Saddle Up, Drink Whiskey, Hit the Trail, etc"></input>
+			</div>
+			<div>
+				<button type="submit" class="btn btn-primary" id="todobutton">Add</button>
+			</div>
+		</form>
+	</div>
 </div>
-<form ng-submit="addToDo()">
-	<h3>Add a new Todo!</h3>
-	<div class="form-group">
-		<input type="text" class="form-control" ng-model="message" placeholder="Thing that needs doing"></input>
+<div class="col-md-4">
+	<div id="deadlist">
+		<h1 class="text-center">The Dead List</h1>
+		<h2 class="text-center">Trailmarkers on the Dusty Road</h2>
+		<div ng-repeat="complete in completedToDos">
+			<span>{{complete.message}}</span>
+		</div>
 	</div>
-	<div>
-		<button type="submit" class="btn btn-primary">Add</button>
-	</div>
-</form>
+</div>

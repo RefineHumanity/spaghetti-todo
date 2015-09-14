@@ -1,8 +1,74 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+html, body {
+	height: 100%;
+	background: url(../images/landscape.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	padding: 1em;
+	font-family: 'Cabin Condensed', sans-serif font-weight: 700;
+	font-size: 1.1em;
+}
+
+table {
+	color:white;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+	background-color: rgba(100,90,100, 0.5);
 }
 
 a {
-  color: #00B7FF;
+  color: orange;
+}
+
+h1, h3 {
+	font-family: 'Lobster', cursive;
+}
+
+#deadlist {
+	background-color: rgba(0,0,100, 0.3);
+	color: white;
+	padding: 0.4em 1em 1em 2em;
+	min-height: 95%;
+	max-height: 95%;
+	margin-bottom: 60px;
+}
+
+#todolist {
+	color: white;
+	background-color: rgba(0,0,50, 0.8);
+	padding: 0.4em 2em 0.4em 2em;
+	margin-bottom: 60px;
+	max-height: 95%;
+}
+
+h1 {
+	font-size: 2.2em;
+}
+
+h2 {
+	font-size: 1.2em;
+}
+
+#todobutton {
+	color: white;
+	background-color: rgba(60,30,50, 1);
+	border-color: orange;
+}
+
+#todobutton:hover {
+	background-color: rgba(0,0,50, 1);
+}
+
+.todofooter {
+	color: white;
+	background-color: rgba(30, 0, 60, 1);
+	height: 50px;
+	padding-top: 10px;
+}
+
+#todotable {
+	max-height: 53%;
+	overflow: auto;
 }
